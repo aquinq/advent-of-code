@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "outDir": "./dist",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+  },
+  "include": ["index.ts", "src"],
+}

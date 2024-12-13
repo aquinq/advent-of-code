@@ -9,11 +9,12 @@
 	},
 	"homepage": "https://github.com/aquinq/advent-of-code-2024#readme",
 	"scripts": {
-		"start": "tsx index.ts"
+		"run": "tsx index.ts"
 	},
 	"dependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@types/node": "^20.12.7",
+		"lefthook": "^1.9.2",
 		"tsx": "^4.19.2",
 		"typescript": "^5.4.5"
 	},

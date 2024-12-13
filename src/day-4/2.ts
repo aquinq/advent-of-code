@@ -1,16 +1,10 @@
-import { Matrix, toMatrix, type Coordinates } from '../matrix';
+import { type Coordinates, Matrix, toMatrix } from '../matrix';
 
 const isXMAS = ({ x, y }: Coordinates, at: Matrix['at']): boolean => {
 	const startLetter = at(x, y);
-	if (startLetter !== 'A')
-		throw new Error(`Unexpected ${startLetter} at position ${x}, ${y}`);
+	if (startLetter !== 'A') throw new Error(`Unexpected ${startLetter} at position ${x}, ${y}`);
 
-	const cornerLetters = [
-		at(x - 1, y - 1),
-		at(x + 1, y - 1),
-		at(x + 1, y + 1),
-		at(x - 1, y + 1),
-	];
+	const cornerLetters = [at(x - 1, y - 1), at(x + 1, y - 1), at(x + 1, y + 1), at(x - 1, y + 1)];
 
 	const validOrders = ['M,M,S,S', 'M,S,S,M', 'S,M,M,S', 'S,S,M,M'];
 

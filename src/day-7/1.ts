@@ -20,18 +20,12 @@ const fnByOp: Record<Operator, typeof add | typeof multiply> = {
 	'*': multiply,
 };
 
-const compute = (a: number, b: number, operator: Operator) =>
-	fnByOp[operator](a, b);
+const compute = (a: number, b: number, operator: Operator) => fnByOp[operator](a, b);
 
-const computeOperands = (
-	[a, b, ...rest]: number[],
-	operators: Operator[],
-): number => {
+const computeOperands = ([a, b, ...rest]: number[], operators: Operator[]): number => {
 	const result = compute(a, b, operators[0]);
 
-	return rest.length === 0
-		? result
-		: computeOperands([result, ...rest], operators.slice(1));
+	return rest.length === 0 ? result : computeOperands([result, ...rest], operators.slice(1));
 };
 
 const isValidEquation = ({ result, operands }: EmptyEquation) => {

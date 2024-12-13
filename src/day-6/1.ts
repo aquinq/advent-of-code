@@ -35,10 +35,7 @@ const run = (input: string) => {
 	let position = startPosition;
 
 	while (isInBounds(position, matrix.length)) {
-		const isNewPosition =
-			positions.findIndex(
-				(value) => value.x === position.x && value.y === position.y,
-			) === -1;
+		const isNewPosition = positions.findIndex((value) => value.x === position.x && value.y === position.y) === -1;
 		if (isNewPosition) positions.push(position);
 
 		const next = getNext(position, direction);

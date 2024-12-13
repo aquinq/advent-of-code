@@ -5,10 +5,7 @@ const run = (data: string) => {
 	const sorted_a = a.sort();
 	const sorted_b = b.sort();
 
-	return sorted_a.reduce<number>(
-		(acc, cur, i) => acc + Math.abs(sorted_b[i] - sorted_a[i]),
-		0,
-	);
+	return sorted_a.reduce<number>((acc, cur, i) => acc + Math.abs(sorted_b[i] - sorted_a[i]), 0);
 };
 
 export default run;

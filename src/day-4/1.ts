@@ -1,66 +1,29 @@
 import { Coordinates, Matrix, toMatrix } from '../matrix';
 
-type Direction =
-	| '1.N'
-	| '2.NE'
-	| '3.E'
-	| '4.SE'
-	| '5.S'
-	| '6.SO'
-	| '7.O'
-	| '8.NO';
+type Direction = '1.N' | '2.NE' | '3.E' | '4.SE' | '5.S' | '6.SO' | '7.O' | '8.NO';
 
-const isValid = (
-	{ x, y }: Coordinates,
-	direction: Direction,
-	at: Matrix['at'],
-): boolean => {
+const isValid = ({ x, y }: Coordinates, direction: Direction, at: Matrix['at']): boolean => {
 	const startLetter = at(x, y);
-	if (startLetter !== 'X')
-		throw new Error(`Unexpected ${startLetter} at position ${x}, ${y}`);
+	if (startLetter !== 'X') throw new Error(`Unexpected ${startLetter} at position ${x}, ${y}`);
 
 	switch (direction) {
 		case '1.N':
-			return (
-				at(x, y - 1) === 'M' && at(x, y - 2) === 'A' && at(x, y - 3) === 'S'
-			);
+			return at(x, y - 1) === 'M' && at(x, y - 2) === 'A' && at(x, y - 3) === 'S';
 		case '2.NE':
-			return (
-				at(x + 1, y - 1) === 'M' &&
-				at(x + 2, y - 2) === 'A' &&
-				at(x + 3, y - 3) === 'S'
-			);
+			return at(x + 1, y - 1) === 'M' && at(x + 2, y - 2) === 'A' && at(x + 3, y - 3) === 'S';
 		case '3.E':
-			return (
-				at(x + 1, y) === 'M' && at(x + 2, y) === 'A' && at(x + 3, y) === 'S'
-			);
+			return at(x + 1, y) === 'M' && at(x + 2, y) === 'A' && at(x + 3, y) === 'S';
 		case '4.SE':
-			return (
-				at(x + 1, y + 1) === 'M' &&
-				at(x + 2, y + 2) === 'A' &&
-				at(x + 3, y + 3) === 'S'
-			);
+			return at(x + 1, y + 1) === 'M' && at(x + 2, y + 2) === 'A' && at(x + 3, y + 3) === 'S';
 		case '5.S':
-			return (
-				at(x, y + 1) === 'M' && at(x, y + 2) === 'A' && at(x, y + 3) === 'S'
-			);
+			return at(x, y + 1) === 'M' && at(x, y + 2) === 'A' && at(x, y + 3) === 'S';
 		case '6.SO':
-			return (
-				at(x - 1, y + 1) === 'M' &&
-				at(x - 2, y + 2) === 'A' &&
-				at(x - 3, y + 3) === 'S'
-			);
+			return at(x - 1, y + 1) === 'M' && at(x - 2, y + 2) === 'A' && at(x - 3, y + 3) === 'S';
 		case '7.O':
-			return (
-				at(x - 1, y) === 'M' && at(x - 2, y) === 'A' && at(x - 3, y) === 'S'
-			);
+			return at(x - 1, y) === 'M' && at(x - 2, y) === 'A' && at(x - 3, y) === 'S';
 		default:
 			// 8.NO
-			return (
-				at(x - 1, y - 1) === 'M' &&
-				at(x - 2, y - 2) === 'A' &&
-				at(x - 3, y - 3) === 'S'
-			);
+			return at(x - 1, y - 1) === 'M' && at(x - 2, y - 2) === 'A' && at(x - 3, y - 3) === 'S';
 	}
 };
 

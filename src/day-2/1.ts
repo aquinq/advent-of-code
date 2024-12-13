@@ -1,9 +1,6 @@
 import { parseData } from './utils';
 
-export const isSafe = (
-	array: number[],
-	direction?: 'asc' | 'desc',
-): boolean => {
+export const isSafe = (array: number[], direction?: 'asc' | 'desc'): boolean => {
 	if (array.length === 1) return true;
 
 	const a = array[0];

@@ -26,25 +26,18 @@ const getNext = ({ x, y }: Coordinates, direction: Direction) => {
 	}
 };
 
-const getPositions = (
-	matrix: Matrix,
-	startPosition: Coordinates,
-	init = false,
-) => {
+const getPositions = (matrix: Matrix, startPosition: Coordinates, init = false) => {
 	const allPositions: Position[] = [];
 	const identityFn =
 		({ x, y }: Coordinates, direction: Direction) =>
 		(position: Position) =>
-			position.value.x === x &&
-			position.value.y === y &&
-			(init || position.direction === direction);
+			position.value.x === x && position.value.y === y && (init || position.direction === direction);
 
 	let direction: Direction = '^';
 	let position = startPosition;
 
 	while (isInBounds(position, matrix.length)) {
-		const isNewPosition =
-			allPositions.findIndex(identityFn(position, direction)) === -1;
+		const isNewPosition = allPositions.findIndex(identityFn(position, direction)) === -1;
 		if (isNewPosition) {
 			allPositions.push({ value: position, direction });
 		} else {

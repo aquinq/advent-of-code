@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/aquinq/advent-of-code-2024#readme",
   "scripts": {
-    "run": "tsx index.ts",
+    "start": "tsx index.ts",
     "setup": "lefthook install"
   },
   "dependencies": {

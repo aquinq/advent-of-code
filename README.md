@@ -7,7 +7,7 @@ $ yarn
 
 2. Run
 ```bash
-$ yarn run
+$ yarn start
 ```
 
 3. Install Biome extension (linter & formatter)

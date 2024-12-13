@@ -40,8 +40,8 @@ const isValidEquation = ({ result, operands }: EmptyEquation) => {
   return false;
 };
 
-const run = (input: string) => {
-  const emptyEquations: EmptyEquation[] = parseData(input);
+const run = (data: string) => {
+  const emptyEquations: EmptyEquation[] = parseData(data);
 
   return emptyEquations.reduce((acc, cur, i) => {
     console.log({ i });

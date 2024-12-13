@@ -26,8 +26,8 @@ const getNext = ({ x, y }: Coordinates, direction: Direction) => {
   }
 };
 
-const run = (input: string) => {
-  const matrix = toMatrix(input);
+const run = (data: string) => {
+  const matrix = toMatrix(data);
   const startPosition = matrix.findAll('^')[0];
 
   const positions: Coordinates[] = [];

@@ -63,8 +63,8 @@ type Position = {
   direction: Direction;
 };
 
-const run = (input: string) => {
-  const matrix = toMatrix(input);
+const run = (data: string) => {
+  const matrix = toMatrix(data);
   const startPosition = matrix.findAll('^')[0];
 
   const allPositions = getPositions(matrix, startPosition, true);
@@ -76,7 +76,7 @@ const run = (input: string) => {
     const {
       value: { x, y },
     } = position;
-    const newMatrix = toMatrix(input);
+    const newMatrix = toMatrix(data);
     newMatrix.set(x, y, '#');
 
     try {

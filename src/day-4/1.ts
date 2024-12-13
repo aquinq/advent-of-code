@@ -27,9 +27,9 @@ const isValid = ({ x, y }: Coordinates, direction: Direction, at: Matrix['at']):
   }
 };
 
-const run = (input: string) => {
+const run = (data: string) => {
   const word = 'XMAS';
-  const matrix = toMatrix(input);
+  const matrix = toMatrix(data);
   const matrixSize = matrix.length;
 
   if (word.length > matrixSize) throw new Error('oh oh, word is too large');

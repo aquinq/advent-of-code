@@ -11,8 +11,8 @@ const isXMAS = ({ x, y }: Coordinates, at: Matrix['at']): boolean => {
   return validOrders.includes(cornerLetters.toString());
 };
 
-const run = (input: string) => {
-  const matrix = toMatrix(input);
+const run = (data: string) => {
+  const matrix = toMatrix(data);
   const matrixSize = matrix.length;
 
   const startCoordinates = matrix.findAll('A');

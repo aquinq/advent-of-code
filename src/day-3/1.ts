@@ -1,5 +1,5 @@
-const run = (input: string) => {
-  const matches = input.match(/mul\(\d{1,3},\d{1,3}\)/g);
+const run = (data: string) => {
+  const matches = data.match(/mul\(\d{1,3},\d{1,3}\)/g);
 
   if (matches === null) throw new Error('oh oh, no input matches');
 

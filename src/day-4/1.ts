@@ -1,8 +1,8 @@
-import { Coordinates, Matrix, toMatrix } from '../matrix';
+import { Matrix, Position, toMatrix } from '../matrix';
 
 type Direction = '1.N' | '2.NE' | '3.E' | '4.SE' | '5.S' | '6.SO' | '7.O' | '8.NO';
 
-const isValid = ({ x, y }: Coordinates, direction: Direction, at: Matrix['at']): boolean => {
+const isValid = ({ x, y }: Position, direction: Direction, at: Matrix['at']): boolean => {
   const startLetter = at(x, y);
   if (startLetter !== 'X') throw new Error(`Unexpected ${startLetter} at position ${x}, ${y}`);
 
@@ -34,9 +34,9 @@ const run = (data: string) => {
 
   if (word.length > matrixSize) throw new Error('oh oh, word is too large');
 
-  const startCoordinates = matrix.findAll('X');
+  const startPositions = matrix.findAll('X');
 
-  const getPossibleDirections = ({ x, y }: Coordinates): Direction[] => {
+  const getPossibleDirections = ({ x, y }: Position): Direction[] => {
     const directions: Direction[] = [];
 
     const conditions: Record<string, boolean> = {
@@ -58,7 +58,7 @@ const run = (data: string) => {
     return directions;
   };
 
-  return startCoordinates.reduce((acc, cur) => {
+  return startPositions.reduce((acc, cur) => {
     const directions = getPossibleDirections(cur);
     const count = directions.reduce((acc2, cur2) => {
       const passes = isValid(cur, cur2, matrix.at);

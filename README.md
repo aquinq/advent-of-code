@@ -1,21 +1,29 @@
 # Advent of code 2024
 
-1. Install dependencies
+## Install dependencies
 ```bash
 $ yarn
 ```
 
-2. Run
+## Run
+
+Set the day/part to be run in `index.ts`
+```ts
+const [day, part] = [8, 1];
+```
+Then
 ```bash
 $ yarn start
 ```
 
-3. Install Biome extension (linter & formatter)
+## Setup
+
+1. Install Biome extension (linter & formatter)
 
 - [VSCode](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) 
 - [Webstorm](https://plugins.jetbrains.com/plugin/22761-biome)
 
- 
-
-> [!NOTE]
-> The day/part to run is set in `index.ts`
+2. Install commit hooks
+```bash
+$ yarn setup
+```

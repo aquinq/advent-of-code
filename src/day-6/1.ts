@@ -1,4 +1,4 @@
-import { Coordinates, toMatrix } from '../matrix';
+import { Position, toMatrix } from '../matrix';
 
 type Direction = '^' | '>' | 'v' | '<';
 
@@ -9,10 +9,7 @@ const NEXT_DIRECTION: Record<Direction, Direction> = {
   '<': '^',
 };
 
-const isInBounds = ({ x, y }: Coordinates, matrixSize: number) =>
-  x >= 1 && x <= matrixSize && y >= 1 && y <= matrixSize;
-
-const getNext = ({ x, y }: Coordinates, direction: Direction) => {
+const getNext = ({ x, y }: Position, direction: Direction) => {
   switch (direction) {
     case '^':
       return { x, y: y - 1 };
@@ -26,21 +23,26 @@ const getNext = ({ x, y }: Coordinates, direction: Direction) => {
   }
 };
 
+const identityFn =
+  (position: Position) =>
+  ({ x, y }: Position) =>
+    position.x === x && position.y === y;
+
 const run = (data: string) => {
   const matrix = toMatrix(data);
   const startPosition = matrix.findAll('^')[0];
 
-  const positions: Coordinates[] = [];
+  const positions: Position[] = [];
   let direction: Direction = '^';
   let position = startPosition;
 
-  while (isInBounds(position, matrix.length)) {
-    const isNewPosition = positions.findIndex((value) => value.x === position.x && value.y === position.y) === -1;
+  while (matrix.hasPosition(position)) {
+    const isNewPosition = positions.findIndex(identityFn(position)) === -1;
     if (isNewPosition) positions.push(position);
 
     const next = getNext(position, direction);
 
-    if (matrix.at(next.x, next.y) === '#') {
+    if (matrix.at(next) === '#') {
       direction = NEXT_DIRECTION[direction];
     } else {
       position = next;

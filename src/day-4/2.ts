@@ -1,6 +1,6 @@
-import { type Coordinates, Matrix, toMatrix } from '../matrix';
+import { Matrix, type Position, toMatrix } from '../matrix';
 
-const isXMAS = ({ x, y }: Coordinates, at: Matrix['at']): boolean => {
+const isXMAS = ({ x, y }: Position, at: Matrix['at']): boolean => {
   const startLetter = at(x, y);
   if (startLetter !== 'A') throw new Error(`Unexpected ${startLetter} at position ${x}, ${y}`);
 
@@ -15,14 +15,14 @@ const run = (data: string) => {
   const matrix = toMatrix(data);
   const matrixSize = matrix.length;
 
-  const startCoordinates = matrix.findAll('A');
+  const startPosition = matrix.findAll('A');
 
-  const validateCoordinates = ({ x, y }: Coordinates): boolean =>
+  const validatePositions = ({ x, y }: Position): boolean =>
     x >= 2 && x <= matrixSize - 1 && y >= 2 && y <= matrixSize - 1;
 
-  const validCoordinates = startCoordinates.filter(validateCoordinates);
+  const validPositions = startPosition.filter(validatePositions);
 
-  return validCoordinates.reduce((acc, cur) => {
+  return validPositions.reduce((acc, cur) => {
     const passes = isXMAS(cur, matrix.at);
     return passes ? acc + 1 : acc;
   }, 0);

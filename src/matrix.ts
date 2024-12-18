@@ -1,55 +1,44 @@
-export type Coordinates = { x: number; y: number };
+export type Position = { x: number; y: number };
 
 export type Matrix = ReturnType<typeof toMatrix>;
+
+type Util<T> = (x: number, y: number) => T;
 
 export const toMatrix = (input: string) => {
   const matrix = input.split('\n').map((row) => row.split(''));
 
-  const at = (x: number, y: number) => matrix[y - 1][x - 1];
   const set = (x: number, y: number, value: string) => {
     matrix[y - 1][x - 1] = value;
   };
 
+  const defineUtil =
+    <T>(fn: Util<T>) =>
+    (arg1: number | Position, arg2?: number) => {
+      const { x, y } = typeof arg1 === 'number' ? { x: arg1, y: arg2! } : arg1;
+      return fn(x, y);
+    };
+
+  const at = defineUtil<string | undefined>((x, y) => {
+    const isOutOfBounds = x < 1 || x > matrix.length || y < 1 || y > matrix.length;
+    return isOutOfBounds ? undefined : matrix[y - 1][x - 1];
+  });
+
+  const hasPosition = defineUtil<boolean>((x, y) => at(x, y) !== undefined);
+
+  const reducePositions = <T>(fn: (acc: T, cur: string, position: Position) => T, initialValue: T) => {
+    let acc: T = initialValue;
+    for (let y = 1; y <= matrix.length; ++y) {
+      for (let x = 1; x <= matrix.length; ++x) {
+        acc = fn(acc, at(x, y)!, { x, y });
+      }
+    }
+    return acc;
+  };
+
   const findAll = (s: string) =>
-    matrix.reduce<Coordinates[]>((acc, cur, y) => {
-      return acc.concat(
-        cur.reduce<Coordinates[]>((acc2, cur2, x) => {
-          return cur2 === s ? acc2.concat([{ x: x + 1, y: y + 1 }]) : acc2;
-        }, []),
-      );
+    reducePositions<Position[]>((acc, cur, position) => {
+      return cur === s ? acc.concat(position) : acc;
     }, []);
 
-  return Object.assign(matrix, { at, set, findAll });
+  return Object.assign(matrix, { at, hasPosition, set, reducePositions, findAll });
 };
-
-export class Matrix2D {
-  // TODO : test if class is faster
-  private _matrix: string[][];
-
-  constructor(input: string) {
-    this._matrix = input.split('\n').map((row) => row.split(''));
-  }
-
-  public get() {
-    return this._matrix;
-  }
-
-  public at(x: number, y: number) {
-    return this._matrix[y - 1][x - 1];
-  }
-
-  public set(x: number, y: number, value: string) {
-    this._matrix[y - 1][x - 1] = value;
-    return this._matrix;
-  }
-
-  public findAll(value: string): Coordinates[] {
-    return this._matrix.reduce<Coordinates[]>((acc, cur, y) => {
-      return acc.concat(
-        cur.reduce<Coordinates[]>((acc2, cur2, x) => {
-          return cur2 === value ? acc2.concat([{ x: x + 1, y: y + 1 }]) : acc2;
-        }, []),
-      );
-    }, []);
-  }
-}

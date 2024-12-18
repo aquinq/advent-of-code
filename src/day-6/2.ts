@@ -1,4 +1,4 @@
-import { Coordinates, Matrix, toMatrix } from '../matrix';
+import { Matrix, Position, toMatrix } from '../matrix';
 
 type Direction = '^' | '>' | 'v' | '<';
 
@@ -9,10 +9,7 @@ const NEXT_DIRECTION: Record<Direction, Direction> = {
   '<': '^',
 };
 
-const isInBounds = ({ x, y }: Coordinates, matrixSize: number) =>
-  x >= 1 && x <= matrixSize && y >= 1 && y <= matrixSize;
-
-const getNext = ({ x, y }: Coordinates, direction: Direction) => {
+const getNext = ({ x, y }: Position, direction: Direction) => {
   switch (direction) {
     case '^':
       return { x, y: y - 1 };
@@ -26,20 +23,20 @@ const getNext = ({ x, y }: Coordinates, direction: Direction) => {
   }
 };
 
-const getPositions = (matrix: Matrix, startPosition: Coordinates, init = false) => {
-  const allPositions: Position[] = [];
+const getGuardPositions = (matrix: Matrix, startPosition: Position, init = false) => {
+  const allGuardPositions: GuardPosition[] = [];
   const identityFn =
-    ({ x, y }: Coordinates, direction: Direction) =>
-    (position: Position) =>
+    ({ x, y }: Position, direction: Direction) =>
+    (position: GuardPosition) =>
       position.value.x === x && position.value.y === y && (init || position.direction === direction);
 
   let direction: Direction = '^';
   let position = startPosition;
 
-  while (isInBounds(position, matrix.length)) {
-    const isNewPosition = allPositions.findIndex(identityFn(position, direction)) === -1;
+  while (matrix.hasPosition(position)) {
+    const isNewPosition = allGuardPositions.findIndex(identityFn(position, direction)) === -1;
     if (isNewPosition) {
-      allPositions.push({ value: position, direction });
+      allGuardPositions.push({ value: position, direction });
     } else {
       if (!init) {
         throw new Error('loop!');
@@ -48,18 +45,18 @@ const getPositions = (matrix: Matrix, startPosition: Coordinates, init = false) 
 
     const next = getNext(position, direction);
 
-    if (matrix.at(next.x, next.y) === '#') {
+    if (matrix.at(next) === '#') {
       direction = NEXT_DIRECTION[direction];
     } else {
       position = next;
     }
   }
 
-  return allPositions;
+  return allGuardPositions;
 };
 
-type Position = {
-  value: Coordinates;
+type GuardPosition = {
+  value: Position;
   direction: Direction;
 };
 
@@ -67,9 +64,9 @@ const run = (data: string) => {
   const matrix = toMatrix(data);
   const startPosition = matrix.findAll('^')[0];
 
-  const allPositions = getPositions(matrix, startPosition, true);
-  const positions = allPositions.slice(1); // start position is not available.
-  const loopingObstaclePositions: Position[] = [];
+  const allGuardPositions = getGuardPositions(matrix, startPosition, true);
+  const positions = allGuardPositions.slice(1); // start position is not available.
+  const loopingObstaclePositions: GuardPosition[] = [];
 
   positions.forEach((position, i) => {
     console.log({ i });
@@ -80,7 +77,7 @@ const run = (data: string) => {
     newMatrix.set(x, y, '#');
 
     try {
-      getPositions(newMatrix, startPosition);
+      getGuardPositions(newMatrix, startPosition);
     } catch (error) {
       if ((error as Error).message === 'loop!') {
         loopingObstaclePositions.push(position);

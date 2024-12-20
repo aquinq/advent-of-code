@@ -1,5 +1,7 @@
 export type Position = { x: number; y: number };
 
+type Vector = Position;
+
 export type Matrix = ReturnType<typeof toMatrix>;
 
 type Util<T> = (x: number, y: number) => T;
@@ -42,3 +44,8 @@ export const toMatrix = (input: string) => {
 
   return Object.assign(matrix, { at, hasPosition, set, reducePositions, findAll });
 };
+
+export const getDistance = (a: Position, b: Position): Vector => ({
+  x: b.x - a.x,
+  y: b.y - a.y,
+});

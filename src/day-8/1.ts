@@ -1,4 +1,5 @@
-import { Matrix, Position, getDistance, toMatrix } from '../matrix';
+import { uniqBy } from '../array';
+import { Matrix, Position, getDistance, identityFn, toMatrix } from '../matrix';
 
 let matrix: Matrix;
 
@@ -12,11 +13,6 @@ const getPositionsByNodeType = (matrix: Matrix): PositionsByNodeType =>
       [cur]: (acc[cur] ?? []).concat(position),
     };
   }, {});
-
-const identityFn =
-  (antinode: Position) =>
-  ({ x, y }: Position) =>
-    antinode.x === x && antinode.y === y;
 
 /**
  * Returns antinode of a by b.
@@ -65,7 +61,7 @@ const run = (data: string) => {
     antinodes.push(...getAntinodes(nodesOfSameType));
   });
 
-  const uniqAntinodes = antinodes.filter((antinode, index) => antinodes.findIndex(identityFn(antinode)) === index);
+  const uniqAntinodes = uniqBy(antinodes, identityFn);
   return uniqAntinodes.length;
 };
 

@@ -6,6 +6,8 @@ export type Matrix = ReturnType<typeof toMatrix>;
 
 type Util<T> = (x: number, y: number) => T;
 
+export const identityFn = (a: Position, b: Position) => a.x === b.x && a.y === b.y;
+
 export const toMatrix = (input: string) => {
   const matrix = input.split('\n').map((row) => row.split(''));
 

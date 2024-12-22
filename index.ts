@@ -1,6 +1,6 @@
 import { readData } from './utils';
 
-const [day, part] = [11, 1];
+const [day, part] = [11, 2];
 
 const main = async () => {
   const { default: run } = await import(`./src/day-${day}/${part}.js`);

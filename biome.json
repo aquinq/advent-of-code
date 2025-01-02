@@ -36,7 +36,8 @@
         "useImportType": "off"
       },
       "suspicious": {
-        "noAsyncPromiseExecutor": "off"
+        "noAsyncPromiseExecutor": "off",
+        "noConfusingVoidType": "off"
       }
     }
   },

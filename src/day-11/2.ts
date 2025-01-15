@@ -10,7 +10,6 @@ const run = (data: string) => {
   );
 
   for (let i = 0; i < 75; ++i) {
-    console.log({ i });
     const stones = Object.keys(stonesRecord);
     const newStonesRecord: StonesRecord = {};
 

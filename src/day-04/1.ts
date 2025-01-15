@@ -40,10 +40,10 @@ const run = (data: string) => {
     const directions: Direction[] = [];
 
     const conditions: Record<string, boolean> = {
-      n: y >= word.length,
-      e: x <= matrixSize - (word.length - 1),
-      s: y <= matrixSize - (word.length - 1),
-      o: x >= word.length,
+      n: y >= word.length - 1,
+      e: x <= matrixSize - 1 - (word.length - 1),
+      s: y <= matrixSize - 1 - (word.length - 1),
+      o: x >= word.length - 1,
     };
 
     if (conditions.n) directions.push('1.N');

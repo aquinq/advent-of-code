@@ -18,7 +18,7 @@ const run = (data: string) => {
   const startPosition = matrix.findAll('A');
 
   const validatePositions = ({ x, y }: Position): boolean =>
-    x >= 2 && x <= matrixSize - 1 && y >= 2 && y <= matrixSize - 1;
+    x >= 1 && x <= matrixSize - 2 && y >= 1 && y <= matrixSize - 2;
 
   const validPositions = startPosition.filter(validatePositions);
 

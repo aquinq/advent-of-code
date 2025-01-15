@@ -39,7 +39,7 @@ export const toMatrix = (input: string) => {
   }) as MatrixValue;
 
   const set = (x: number, y: number, value: string) => {
-    matrix[y - 1][x - 1] = value;
+    matrix[y][x] = value;
   };
 
   const defineUtil =
@@ -50,8 +50,8 @@ export const toMatrix = (input: string) => {
     };
 
   const at = defineUtil<string | undefined>((x, y) => {
-    const isOutOfBounds = x < 1 || x > matrix.length || y < 1 || y > matrix.length;
-    return isOutOfBounds ? undefined : matrix[y - 1][x - 1];
+    const isOutOfBounds = x < 0 || x > matrix.length - 1 || y < 0 || y > matrix.length - 1;
+    return isOutOfBounds ? undefined : matrix[y][x];
   });
 
   const hasPosition = defineUtil<boolean>((x, y) => at(x, y) !== undefined);
@@ -62,8 +62,8 @@ export const toMatrix = (input: string) => {
   ) => {
     let acc: T = initialValue as T;
     let index = 0;
-    for (let y = 1; y <= matrix.width; ++y) {
-      for (let x = 1; x <= matrix.height; ++x) {
+    for (let y = 0; y <= matrix.width - 1; ++y) {
+      for (let x = 0; x <= matrix.height - 1; ++x) {
         acc = fn(acc, at(x, y)!, { x, y }, index++) ?? acc;
       }
     }

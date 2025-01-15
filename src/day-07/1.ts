@@ -44,7 +44,6 @@ const run = (data: string) => {
   const emptyEquations: EmptyEquation[] = parseData(data);
 
   return emptyEquations.reduce((acc, cur, i) => {
-    console.log({ i });
     return isValidEquation(cur) ? acc + cur.result : acc;
   }, 0);
 };

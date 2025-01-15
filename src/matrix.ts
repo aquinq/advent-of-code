@@ -16,12 +16,27 @@ type Vector = Position;
 
 export type Matrix = ReturnType<typeof toMatrix>;
 
+type MatrixValue = string[][] & {
+  width: number;
+  height: number;
+};
+
 type Util<T> = (x: number, y: number) => T;
 
 export const identityFn = (a: Position, b: Position) => a.x === b.x && a.y === b.y;
 
 export const toMatrix = (input: string) => {
-  const matrix = input.split('\n').map((row) => row.split(''));
+  const _2DArray = input.split('\n').map((row) => row.split(''));
+  const matrix: MatrixValue = Object.defineProperties(_2DArray, {
+    width: {
+      value: _2DArray[0].length,
+      writable: false,
+    },
+    height: {
+      value: _2DArray.length,
+      writable: false,
+    },
+  }) as MatrixValue;
 
   const set = (x: number, y: number, value: string) => {
     matrix[y - 1][x - 1] = value;
@@ -47,8 +62,8 @@ export const toMatrix = (input: string) => {
   ) => {
     let acc: T = initialValue as T;
     let index = 0;
-    for (let y = 1; y <= matrix.length; ++y) {
-      for (let x = 1; x <= matrix.length; ++x) {
+    for (let y = 1; y <= matrix.width; ++y) {
+      for (let x = 1; x <= matrix.height; ++x) {
         acc = fn(acc, at(x, y)!, { x, y }, index++) ?? acc;
       }
     }

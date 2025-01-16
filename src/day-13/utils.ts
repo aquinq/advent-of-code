@@ -1,4 +1,4 @@
-const toXY = (s: string) => s.match(/\d+/g)!.map(Number);
+import { toXY } from '../string';
 
 export const parseData = (data: string, part = 1) =>
   data.split('\n\n').map((machine) => {

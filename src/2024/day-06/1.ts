@@ -1,4 +1,4 @@
-import { Position, toMatrix } from '../matrix';
+import { Position, toMatrix } from '../../utils/matrix';
 
 type Direction = '^' | '>' | 'v' | '<';
 

@@ -1,4 +1,4 @@
-import { Matrix, Position, toMatrix } from '../matrix';
+import { Matrix, Position, toMatrix } from '../../utils/matrix';
 
 type Direction = '1.N' | '2.NE' | '3.E' | '4.SE' | '5.S' | '6.SO' | '7.O' | '8.NO';
 

@@ -1,4 +1,4 @@
-import { Matrix, type Position, toMatrix } from '../matrix';
+import { Matrix, type Position, toMatrix } from '../../utils/matrix';
 
 const isXMAS = ({ x, y }: Position, at: Matrix['at']): boolean => {
   const startLetter = at(x, y);

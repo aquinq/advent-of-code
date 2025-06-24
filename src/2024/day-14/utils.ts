@@ -1,4 +1,4 @@
-import { toXY } from '../string';
+import { toXY } from '../../utils/string';
 
 export const parseData = (data: string) =>
   data.split('\n').map((robot) => {

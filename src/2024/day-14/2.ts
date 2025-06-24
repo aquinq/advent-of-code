@@ -1,4 +1,4 @@
-import { Position, generateMatrix } from '../matrix';
+import { Position, generateMatrix } from '../../utils/matrix';
 import { parseData } from './utils';
 
 type Velocity = Position;

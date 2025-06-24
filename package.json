@@ -1,21 +1,23 @@
 {
-  "name": "advent-of-code-2024",
+  "name": "advent-of-code",
   "version": "1.0.0",
   "author": "https://github.com/aquinq",
   "main": "index.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aquinq/advent-of-code-2024.git"
+    "url": "git+https://github.com/aquinq/advent-of-code.git"
   },
-  "homepage": "https://github.com/aquinq/advent-of-code-2024#readme",
+  "homepage": "https://github.com/aquinq/advent-of-code#readme",
   "scripts": {
     "start": "tsx index.ts",
     "setup": "lefthook install"
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
+    "@types/lodash": "^4.17.14",
     "@types/node": "^20.12.7",
     "lefthook": "^1.9.2",
+    "lodash": "^4.17.21",
     "tsx": "^4.19.2",
     "typescript": "^5.4.5"
   },

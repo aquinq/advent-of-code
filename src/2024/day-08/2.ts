@@ -1,5 +1,5 @@
-import { uniqBy } from '../array';
-import { Matrix, Position, getDistance, identityFn, toMatrix } from '../matrix';
+import { uniqBy } from '../../utils/array';
+import { Matrix, Position, getDistance, identityFn, toMatrix } from '../../utils/matrix';
 
 let matrix: Matrix;
 

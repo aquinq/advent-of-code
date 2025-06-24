@@ -1,4 +1,4 @@
-import { Matrix, Position, PositionId, toMatrix, toPosition, toPositionId } from '../matrix';
+import { Matrix, Position, PositionId, toMatrix, toPosition, toPositionId } from '../../utils/matrix';
 
 let matrix: Matrix;
 

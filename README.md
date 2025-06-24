@@ -1,4 +1,4 @@
-# Advent of code 2024
+# Advent of code
 
 ## Install dependencies
 ```bash
@@ -7,8 +7,9 @@ $ yarn
 
 ## Run
 
-Set the day/part to be run in `index.ts`
+Set the year in `index.ts` and day/part to be run in `{year}/index.ts`
 ```ts
+const year = 2024;
 const [day, part] = [8, 1];
 ```
 Then

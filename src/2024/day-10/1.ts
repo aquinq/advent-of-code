@@ -1,5 +1,5 @@
-import { uniqBy } from '../array';
-import { Position } from '../matrix';
+import { uniqBy } from '../../utils/array';
+import { Position } from '../../utils/matrix';
 
 // First result of part 1 was in fact the result of part 2 😄
 import { getAllTrails } from './2';
